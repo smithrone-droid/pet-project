@@ -4,3 +4,4 @@ webdriver-manager==4.0.2
 pytest-rerunfailures==16.1
 allure-pytest==2.15.3
 python-dotenv==1.0.1
+black==26.3.1
