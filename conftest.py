@@ -12,6 +12,22 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 load_dotenv()
 
+PROMO_LINKS = [
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer2",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer3",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer4",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer5",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer6",
+    pytest.param(
+        "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer7",
+        marks=pytest.mark.skip(reason="Пропускаем offer7, есть дефект по несовпадению названий"),
+    ),
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer8",
+    "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9",
+]
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome")
@@ -110,3 +126,8 @@ def credentials():
         pytest.fail("Креды не заданы")
 
     return login, password
+
+
+@pytest.fixture(params=PROMO_LINKS)
+def link(request):
+    return request.param
