@@ -39,7 +39,13 @@ class ProductPage(BasePage):
         """Проверить, что после добавления товара появляется success-алерт."""
         assert self.is_element_present(
             *ProductPageLocators.SUCCESS_MESSAGE
-        ), "Success message is not present after adding product to cart"
+        ), "Success message is presented"
+
+    def should_not_be_success_message(self):
+        """Проверка, что сообщения об успехе отсутствует"""
+        assert self.is_not_element_present(
+            *ProductPageLocators.SUCCESS_MESSAGE
+        ), "Success message is presented, but should not be"
 
     def should_match_product_name_in_success_message(self):
         """Проверить, что имя товара в алерте совпадает с карточкой."""
